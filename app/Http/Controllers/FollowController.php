@@ -25,10 +25,9 @@ class FollowController extends Controller
         return view('profiles.follows.following', compact('followings','user'));
     }
 
-    public function followers(Profile $profile)
+    public function followers(\App\Models\User $user)
     {
-        $followers = $profile->followers()->latest()->paginate(5);
-        return view('profiles.follows.followers', compact('followers','profile'));
+        $followers = $user->profile->followers()->latest()->paginate(5);
+        return view('profiles.follows.followers', compact('followers','user'));
     }
-
 }

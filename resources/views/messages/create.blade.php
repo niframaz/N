@@ -2,25 +2,20 @@
 
 @section('content')
 <div class="container">
-    @include('inc.messages')
+    @include('inc.messages');
+    <a href="/{{$user->username}}">Go Back</a>
     <h3>Message to {{$user->name}}</h3>
-    <form action="/message/{{$user->id}}" method="post">
+    <form action="/message/{{$user->username}}" method="post">
         @csrf
 
-        <input id="message"
-        type="textarea" 
+        <textarea id="message"
         class="form-control @error('message') is-invalid @enderror"
-        name="message" 
-        value="{{ old('message') }}" 
-        autocomplete="message" autofocus>
+        name="message"
+        placeholder="Message"
+        autofocus>
+        </textarea>
 
-        @error('message')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-
-        <button class="btn btn-primary">Message</button>
+        <button class="btn btn-primary">Send</button>
     </form>
 </div>
 @endsection

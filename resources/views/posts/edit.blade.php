@@ -20,6 +20,7 @@
                         type="text" 
                         class="form-control @error('caption') is-invalid @enderror"
                         name="caption" 
+                        placeholder="Caption"
                         value="{{ old('caption') ?? $post->caption}}" 
                         autocomplete="caption" autofocus>
 

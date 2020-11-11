@@ -16,7 +16,7 @@ class PostController extends Controller
     public function index()
     {
         $users = auth()->user()->following()->pluck('profiles.user_id');
-
+        
         $posts = Post::whereIn('user_id', $users)->with('user')->latest()->paginate(5);
         
         return view('posts.index', compact('posts'));
@@ -50,7 +50,7 @@ class PostController extends Controller
             'image' => $imagePath,
         ]);
 
-         return redirect("/profile/".auth()->user()->id);
+         return redirect(auth()->user()->username);
     }
 
     public function edit(Post $post)
@@ -70,7 +70,7 @@ class PostController extends Controller
         
         $post->update(['caption' => $data['caption']]);
         
-        return redirect("/profile/".auth()->user()->id);
+        return redirect(route('profile', auth()->user()->username));
     }
 
     public function delete(Post $post)
@@ -80,6 +80,6 @@ class PostController extends Controller
 
         Storage::delete('public/'.$post->image);
 
-        return redirect("/profile/".auth()->user()->id);
+        return redirect(route('profile', auth()->user()->username));
     }
 }

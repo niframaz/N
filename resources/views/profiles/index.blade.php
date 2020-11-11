@@ -11,7 +11,7 @@
     Bio: {{$user->profile->about}}
     <br>
     @cannot('update', $user->profile)
-    <a href="/message/{{$user->id}}/create">Message</a>
+    <a href="/message/{{$user->username}}">Message</a>
     <br>
         <form action="/follow/{{$user->id}}" method="post">
             @csrf
@@ -22,12 +22,12 @@
     @can('update', $user->profile)
         <a href="/post/create">Add New Post</a>
         <br>
-        <a href="/profile/{{$user->id}}/edit">Edit Profile</a>
+        <a href="{{route('profile.edit')}}">Edit Profile</a>
     @endcan
     <br>
     {{$user->posts->count()}} posts <br>
-    <a href="/profile/{{$user->id}}/followers">{{$user->profile->followers->count()}} followers </a><br>
-    <a href="/profile/{{$user->id}}/following">{{$user->following->count()}} following</a> <br>
+    <a href="{{route('followers',$user->username)}}">{{$user->profile->followers->count()}} followers </a><br>
+    <a href="/{{$user->username}}/following">{{$user->following->count()}} following</a> <br>
 
     @foreach($posts as $post)
         <a href="/post/{{$post->id}}">

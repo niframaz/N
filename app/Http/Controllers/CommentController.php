@@ -31,6 +31,5 @@ class CommentController extends Controller
         $comment->delete();
 
         return redirect('post/'.$comment->post->id);
-
     }
 }

@@ -65,7 +65,7 @@ class MessagePolicy
      */
     public function delete(User $user, Message $message)
     {
-        //
+        return auth()->user()->id == $message->inbox->user_id;
     }
 
     /**

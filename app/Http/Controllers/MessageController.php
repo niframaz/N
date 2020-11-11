@@ -20,7 +20,15 @@ class MessageController extends Controller
 
    public function create(User $user)
    {
+    //$this->authorize('create' , $user);
+    if (auth()->user()->id !== $user->id)
+    {
        return view('messages.create', compact('user'));
+    }
+    else
+    {
+        return redirect()->back()->with('error','Bad request');
+    }
    }
 
    public function store(User $user)
@@ -39,12 +47,18 @@ class MessageController extends Controller
             $message->message = $data['message'];
             $message->save();
 
-            return redirect('message/'.$user->id.'/create')->with('success','Message Sent');
+            return redirect('message/'.$user->username)->with('success','Message Sent');
         }
         else
         {
-            return redirect('message/'.$user->id.'/create')->with('error','Message Not Sent');
+            return redirect('message/'.$user->username)->with('error','Message Not Sent');
         }
+   }
+   public function delete(\App\Models\Message $message)
+   {
+        $this->authorize('delete', $message);
+        $message->delete();
 
+       return redirect()->back();
    }
 }

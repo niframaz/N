@@ -22,15 +22,13 @@ class ProfileController extends Controller
         return view('profiles.index', compact('user','posts','follows'));
     }
 
-    public function edit(User $user)
+    public function edit()
     {
-        $this->authorize('update', $user->profile);
-        return view('profiles.edit', compact('user'));
+        return view('profiles.edit');
     }
 
-    public function update(User $user)
+    public function update()
     {
-        $this->authorize('update', $user->profile);
         $data = request()->validate([
             'user_image' => 'image',
             'about' => '',
@@ -38,9 +36,9 @@ class ProfileController extends Controller
 
         if(request('user_image'))
         {
-            if($user->profile->user_image !== "profile/noimage.jpg")
+            if(auth()->user()->profile->user_image !== "profile/noimage.jpg")
             {
-                Storage::delete('public/'.$user->profile->user_image);
+                Storage::delete('public/'.auth()->user()->profile->user_image);
             }
 
             $imagePath = request('user_image')->store('profile','public');
@@ -52,6 +50,6 @@ class ProfileController extends Controller
             $imageArray ?? []
         ));
 
-        return redirect("/profile/".auth()->user()->id);
+        return redirect(auth()->user()->username);
     }
 }

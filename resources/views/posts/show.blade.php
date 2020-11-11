@@ -4,7 +4,7 @@
 <div class="container">
     <img src="/storage/{{$post->image}}" class="w-50">
     <br>
-    {{$post->caption}} <br> posted at {{$post->created_at}} by <a href="/profile/{{$post->user->id}}">{{$post->user->name}}</a>
+    {{$post->caption}} <br> posted at {{$post->created_at}} by <a href="/{{$post->user->username}}">{{$post->user->name}}</a>
     <br>
     @can('update', $post)
         <a href="/post/{{$post->id}}/edit">Edit Caption</a>
@@ -23,15 +23,15 @@
     </form>
     <br>
 
-    <form action="/post/{{$post->id}}/{{$post->user->id}}/comment" method="post">
+    <form action="/post/{{$post->id}}/{{$post->user->username}}/comment" method="post">
         @csrf
 
-        <input id="comment" 
-        type="textarea" 
+        <textarea id="comment" 
         class="form-control @error('comment') is-invalid @enderror"
-        name="comment" 
-        value="{{ old('comment') }}" 
-        autocomplete="comment" autofocus>
+        name="comment"
+        placeholder="Comment"
+        autofocus>
+        </textarea>
 
         @error('comment')
             <span class="invalid-feedback" role="alert">
@@ -39,7 +39,7 @@
             </span>
         @enderror
 
-        <button class="btn btn-primary">Comment</button>
+        <button class="btn btn-primary">Send</button>
     </form>
     <br>
     

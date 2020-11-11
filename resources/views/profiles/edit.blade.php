@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form action="/profile/{{$user->id}}" enctype="multipart/form-data" method="post">
+    <form action="{{route('profile.update')}}" enctype="multipart/form-data" method="post">
         @csrf
         @method('PATCH')
 
@@ -16,12 +16,11 @@
                 <div class="form-group row">
                     <label for="about" class="col-md-4 col-form-label">About</label>
 
-                        <input id="about" 
-                        type="textarea" 
+                        <textarea id="about" 
                         class="form-control @error('about') is-invalid @enderror"
-                        name="about" 
-                        value="{{ old('about') ?? $user->profile->about}}" 
-                        autocomplete="about" autofocus>
+                        name="about"
+                        placeholder="About Me"
+                        autofocus>{{auth()->user()->profile->about}}</textarea>
 
                         @error('about')
                             <span class="invalid-feedback" role="alert">
@@ -43,7 +42,6 @@
                 <div class="row pt-4">
                     <button class="btn btn-primary">Save Profile</button>
                 </div>
-
             </div>
         </div>
     </form>

@@ -13,13 +13,11 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="caption" class="col-md-4 col-form-label">Post Caption</label>
-
                         <input id="caption" 
                         type="text" 
                         class="form-control @error('caption') is-invalid @enderror"
                         name="caption" 
-                        value="{{ old('caption') }}" 
+                        placeholder="Caption"
                         autocomplete="caption" autofocus>
 
                         @error('caption')
@@ -40,7 +38,7 @@
                 </div>
 
                 <div class="row pt-4">
-                    <button class="btn btn-primary">Add New Post</button>
+                    <button class="btn btn-primary">Post</button>
                 </div>
 
             </div>
