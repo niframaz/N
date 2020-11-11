@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    @foreach($messages as $message)
+    @forelse($messages as $message)
     <a href="{{$message->user->username}}">{{$message->user->name}}</a> : {{$message->message}} - <small>{{$message->created_at}}</small>
         <br>
         <form action="/{{$message->id}}" enctype="multipart/form-data" method="post">
@@ -11,7 +11,9 @@
             <button class="btn btn-danger">Delete</button>
         </form>
         <br>
-    @endforeach 
+        @empty
+            <p>You have no messages</p>
+    @endforelse
     {{$messages->links()}}
 </div>
 @endsection
