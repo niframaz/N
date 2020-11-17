@@ -4,9 +4,7 @@
 <div class="container">
     <img src="/storage/{{$user->profile->user_image}}" height="100">
     <br>
-    Name : {{$user->name}}
-    <br>
-    Username: {{$user->username}}
+    {{$user->name}}
     <br>
     Bio: {{$user->profile->about}}
     <br>
@@ -15,7 +13,7 @@
     <br>
         <form action="/follow/{{$user->id}}" method="post">
             @csrf
-            <button class="btn btn-primary">{{$follows ? 'Unfollow' : 'Follow'}}</button>
+            <follow-button class="btn btn-primary py-1 h4" user-id = "{{$user->id}}" follows="{{$follows}}"></follow-button>
         </form>
     @endcannot
     <br>

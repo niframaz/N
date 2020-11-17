@@ -2,13 +2,12 @@
 
 @section('content')
 <div class="container">
-    <form action="{{route('profile.update')}}" enctype="multipart/form-data" method="post">
-        @csrf
-        @method('PATCH')
-
-        <div class="row">
-            <div class="col-8 offset-2">
-
+    <div class="row">
+        <div class="col-8 offset-2">
+            <form action="{{route('profile.update')}}" enctype="multipart/form-data" method="post">
+                @csrf
+                @method('PATCH')
+                
                 <div class="row">
                     <h1>Edit Profile</h1>
                 </div>
@@ -42,8 +41,10 @@
                 <div class="row pt-4">
                     <button class="btn btn-primary">Save Profile</button>
                 </div>
-            </div>
+            </form>
+            
+            <a href="/{{auth()->user()->username}}" class="row">Cancel</a>
         </div>
-    </form>
+    </div>
 </div>
 @endsection

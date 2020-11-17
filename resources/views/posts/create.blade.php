@@ -2,12 +2,10 @@
 
 @section('content')
 <div class="container">
-    <form action="/post" enctype="multipart/form-data" method="post">
-        @csrf
-
-        <div class="row">
-            <div class="col-8 offset-2">
-
+    <div class="row">
+        <div class="col-8 offset-2">
+            <form action="/post" enctype="multipart/form-data" method="post">
+                @csrf
                 <div class="row">
                     <h1>Add New Post</h1>
                 </div>
@@ -39,10 +37,10 @@
 
                 <div class="row pt-4">
                     <button class="btn btn-primary">Post</button>
-                </div>
-
-            </div>
+                </div> 
+            </form>
+            <a href="/{{auth()->user()->username}}" class="row">Cancel</a>
         </div>
-    </form>
+    </div>
 </div>
 @endsection

@@ -14,9 +14,10 @@ class FollowController extends Controller
 
     public function store(Profile $profile)
     {
+        if(auth()->user()->id !== $profile->id)
+        {
         auth()->user()->following()->toggle($profile);
-        
-        return redirect()->back();
+        }
     }
 
     public function following(\App\Models\User $user)
