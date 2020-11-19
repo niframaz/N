@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -15,7 +16,7 @@ class MessageController extends Controller
     public function index()
     {
         $messages = auth()->user()->inbox->messages()->latest()->paginate(5);
-        return view('messages.index',compact('messages'));
+        return view('message.index',compact('messages'));
     }
 
    public function create(User $user)
@@ -23,7 +24,7 @@ class MessageController extends Controller
     //$this->authorize('create' , $user);
     if (auth()->user()->id !== $user->id)
     {
-       return view('messages.create', compact('user'));
+       return view('message.create', compact('user'));
     }
     else
     {
@@ -41,7 +42,7 @@ class MessageController extends Controller
 
         if (auth()->user()->id !== $user->id)
         {
-            $message = new \App\Models\Message;
+            $message = new Message;
             $message->user_id = auth()->user()->id;
             $message->inbox_id = $user->inbox->id;
             $message->message = $data['message'];
@@ -54,7 +55,7 @@ class MessageController extends Controller
             return redirect('message/'.$user->username)->with('error','Message Not Sent');
         }
    }
-   public function delete(\App\Models\Message $message)
+   public function delete(Message $message)
    {
         $this->authorize('delete', $message);
         $message->delete();

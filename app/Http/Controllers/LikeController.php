@@ -23,6 +23,6 @@ class LikeController extends Controller
     {
         $likes = $post->like()->latest()->paginate(5);
 
-        return view('posts.likes', compact('likes','post'));
+        return view('post.likes', compact('likes','post'));
     }
 }

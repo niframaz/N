@@ -9,6 +9,9 @@
         <div class="row">
             <div class="col-8 offset-2">
 
+                <a href="/post/{{$post->id}}" class="row">Go Back</a>
+                <br>
+
                 <div class="row">
                     <h1>Edit Caption</h1>
                 </div>

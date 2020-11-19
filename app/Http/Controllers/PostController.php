@@ -19,7 +19,7 @@ class PostController extends Controller
         
         $posts = Post::whereIn('user_id', $users)->with('user')->latest()->paginate(5);
         
-        return view('posts.index', compact('posts'));
+        return view('post.index', compact('posts'));
     }
     
     public function show(Post $post)
@@ -28,12 +28,12 @@ class PostController extends Controller
         
         $comments = $post->comments()->latest()->paginate(5);
         
-        return view('posts.show', compact('post','comments','like'));
+        return view('post.show', compact('post','comments','like'));
     }
 
     public function create()
     {
-        return view('posts.create');
+        return view('post.create');
     }
 
     public function store()
@@ -57,7 +57,7 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
-            return view('posts.edit', compact('post'));
+            return view('post.edit', compact('post'));
     }
 
     public function update(Post $post)
@@ -70,7 +70,7 @@ class PostController extends Controller
         
         $post->update(['caption' => $data['caption']]);
         
-        return redirect(route('profile', auth()->user()->username));
+        return redirect(route('post', $post->id));
     }
 
     public function delete(Post $post)

@@ -22,7 +22,7 @@ Route::get('message/{user}', '\App\Http\Controllers\MessageController@create');
 Route::post('like/{post}', '\App\Http\Controllers\LikeController@store');
 
 Route::get('post/create', 'App\Http\Controllers\PostController@create');
-Route::get('post/{post}', [App\Http\Controllers\PostController::class, 'show']);
+Route::get('post/{post}', [App\Http\Controllers\PostController::class, 'show'])->name('post');
 Route::patch('post/{post}', [App\Http\Controllers\PostController::class, 'update']);
 Route::delete('post/{post}', [App\Http\Controllers\PostController::class, 'delete']);
 Route::get('post/{post}/likes', '\App\Http\Controllers\LikeController@likes');

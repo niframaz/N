@@ -19,12 +19,12 @@ class ProfileController extends Controller
 
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->profile->id) : false;
 
-        return view('profiles.index', compact('user','posts','follows'));
+        return view('profile.index', compact('user','posts','follows'));
     }
 
     public function edit()
     {
-        return view('profiles.edit');
+        return view('profile.edit');
     }
 
     public function update()
