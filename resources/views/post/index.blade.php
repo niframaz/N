@@ -9,7 +9,7 @@
     <div>
         <form action="/like/{{$post->id}}" method="post">
             @csrf
-            <button class="btn btn-primary">{{auth()->user()->like->contains($post->id) ? 'Unlike' : 'Like'}}</button>
+            <button class="btn btn-primary">{{$like ? 'Unlike' : 'Like'}}</button>
         </form>
     {{$post->like->count()}} <a href="/post/{{$post->id}}/likes">likes</a> {{$post->comments()->count()}} <a href="/post/{{$post->id}}"> Comments</a> {{$post->caption}} posted by <a href="/{{$post->user->username}}">{{$post->user->name}}</a>
     </div>
