@@ -32,10 +32,12 @@
             <img height="350"src="/storage/{{$post->image}}">
         </a>
             <div>{{$post->caption}}</div>
+            @if (Auth::user())
             <form action="/like/{{$post->id}}" method="post">
                 @csrf
                 <button class="btn btn-primary">{{auth()->user()->like->contains($post->id) ? 'Unlike' : 'Like'}}</button>
             </form>
+            @endif
             {{$post->like->count()}} <a href="/post/{{$post->id}}/likes">likes</a> {{$post->comments()->count()}} <a href="/post/{{$post->id}}"> Comments</a>
     
             <br>
